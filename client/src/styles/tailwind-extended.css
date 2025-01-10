@@ -1,0 +1,102 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--mainTextColor);
+}
+
+p,
+li,
+a {
+    color: var(--mainDarkLightTextColor);
+}
+
+.flex-center {
+    @apply flex items-center justify-center;
+}
+.flex-between {
+    @apply flex items-center justify-between;
+}
+.flex-start {
+    @apply flex items-center justify-start;
+}
+.flex-end {
+    @apply flex items-center justify-end;
+}
+.flex-1 {
+    @apply flex items-center gap-1;
+}
+.flex-2 {
+    @apply flex items-center gap-2;
+}
+.flex-3 {
+    @apply flex items-center gap-3;
+}
+
+.flex-col-1 {
+    @apply flex flex-col  gap-1;
+}
+.flex-col-2 {
+    @apply flex flex-col  gap-2;
+}
+.flex-col-3 {
+    @apply flex flex-col  gap-3;
+}
+.flex-col-4 {
+    @apply flex flex-col  gap-4;
+}
+.flex-col-5 {
+    @apply flex flex-col  gap-5;
+}
+
+.flex-col-10 {
+    @apply flex flex-col  gap-10;
+}
+.flex-col-20 {
+    @apply flex flex-col  gap-20;
+}
+.max-w-wrapper {
+    @apply max-w-7xl mx-auto px-5 xl:px-0;
+}
+.larger-max-w-wrapper {
+    @apply max-w-[110rem] mx-auto px-5 xl:px-0;
+}
+
+/* .fill-button {
+    @apply border w-full bg-[var(--mainDarkenLightTextColor)] md:w-max shadow-lg border-neutral-800 px-5 p-[5px] rounded-md hover:bg-neutral-400 transition-all;
+}
+.fill-danger-button {
+    @apply border w-full bg-red-600 md:w-max shadow-lg text-white border-neutral-800 px-5 p-[5px] rounded-md hover:bg-red-700 transition-all;
+} */
+
+/* .outline-button {
+    @apply border w-full md:w-max border-neutral-800 shadow-lg text-mainDarkenLightTextColor px-5 p-[5px] rounded-md hover:bg-neutral-800 transition-all;
+} */
+
+.grid-2 {
+    @apply grid grid-cols-1 md:grid-cols-2;
+}
+.grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+}
+.grid-4 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+
+.gradient-one{
+    @apply border border-neutral-800 bg-gradient-to-br from-neutral-800 to-red-900/50 shadow-md hover:shadow-lg transition-shadow duration-300
+}
+.gradient-two{
+    @apply border border-neutral-800 bg-gradient-to-br from-red-900/50 to-neutral-800 shadow-md hover:shadow-lg transition-shadow duration-300 
+}
+
+
+/* .fill-red-button{
+    @apply text-white bg-red-600 rounded-lg px-4 py-2 font-bold
+}
+.outline-red-button{
+    @apply text-white bg-transparent border border-red-600 rounded-lg px-4 py-2 font-bold
+} */
