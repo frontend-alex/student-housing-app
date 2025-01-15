@@ -1,9 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
-const svgToDataUri = require("mini-svg-data-uri");
-const {
-	default: flattenColorPalette,
-  } = require("tailwindcss/lib/util/flattenColorPalette");
+import svgToDataUri from "mini-svg-data-uri";
+import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColorPalette";
 
 export default {
 	darkMode: ["class"],
@@ -13,15 +11,57 @@ export default {
 	],
 	theme: {
 		extend: {
+			animation: {
+				first: "moveVertical 30s ease infinite",
+				second: "moveInCircle 20s reverse infinite",
+				third: "moveInCircle 40s linear infinite",
+				fourth: "moveHorizontal 40s ease infinite",
+				fifth: "moveInCircle 20s ease infinite",
+			},
+			keyframes: {
+				moveHorizontal: {
+					"0%": {
+						transform: "translateX(-50%) translateY(-10%)",
+					},
+					"50%": {
+						transform: "translateX(50%) translateY(10%)",
+					},
+					"100%": {
+						transform: "translateX(-50%) translateY(-10%)",
+					},
+				},
+				moveInCircle: {
+					"0%": {
+						transform: "rotate(0deg)",
+					},
+					"50%": {
+						transform: "rotate(180deg)",
+					},
+					"100%": {
+						transform: "rotate(360deg)",
+					},
+				},
+				moveVertical: {
+					"0%": {
+						transform: "translateY(-50%)",
+					},
+					"50%": {
+						transform: "translateY(50%)",
+					},
+					"100%": {
+						transform: "translateY(-50%)",
+					},
+				}
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			colors: {
+				'main' : 'var(--mainColor)',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				mainColor: 'var(--mainColor)',
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
@@ -63,8 +103,7 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate"),
-	function ({ matchUtilities, theme }: any) {
+	plugins: [require("tailwindcss-animate"), function ({ matchUtilities, theme }: any) {
 		matchUtilities(
 			{
 				"bg-grid": (value: any) => ({
@@ -85,7 +124,17 @@ export default {
 			},
 			{ values: flattenColorPalette(theme("backgroundColor")), type: "color" }
 		);
-	},
-	],
+	},],
 }
 
+
+function addVariablesForColors({ addBase, theme }: any) {
+	let allColors = flattenColorPalette(theme("colors"));
+	let newVars = Object.fromEntries(
+	  Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+	);
+   
+	addBase({
+	  ":root": newVars,
+	});
+  }

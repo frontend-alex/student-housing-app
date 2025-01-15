@@ -1,0 +1,27 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace Server.Models
+{
+    public class User
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; } = null!;
+
+        [BsonElement("Username")]
+        public string Username { get; set; } = null!;
+        [BsonElement("Email")]
+        public string Email { get; set; } = null!;
+
+        [BsonElement("Password")]
+        public string Password { get; set; } = null!;
+
+        [BsonElement("Roles")]
+        public List<string> Roles { get; set; } = new List<string> { "Tenant" };
+
+
+        [BsonElement("Tasks")]
+        public List<Task> Tasks { get; set; } = new List<Task>();
+    }
+}
