@@ -6,8 +6,7 @@ namespace Server.Models
     public class Task
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string TaskId { get; set; } = null!;
+        public string Id { get; set; } = null!;
 
         [BsonElement("Title")]
         public string Title { get; set; } = null!;

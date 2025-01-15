@@ -3,7 +3,6 @@ import { assingTaskSchemaForm } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { formatDate } from "@/lib/utils";
 import { assingTask } from "@/hooks/api";
 import useAuthData from "@/hooks/useAuthData";
 
@@ -26,6 +25,7 @@ const DialogController = (username: string) => {
   const onAssingTaskSubmit = async (data: z.infer<typeof assingTaskSchemaForm>): Promise<any> => {
   
     const taskData = {
+      Id: user?.id,
       Username: username,
       Title: data.title,
       Description: data.description,

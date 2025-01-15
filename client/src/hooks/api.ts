@@ -141,11 +141,8 @@ export const assingTask = async (data: any): Promise<any> => {
   try {
     const response = await axiosInstance.post(`/auth/assign-task`, data);
 
-    console.log(response);
-
     if (response?.status === 200) {
-      toast.success(response.data.message);
-      window.location.href = "/dashboard";
+      window.location.reload();
     }
   } catch (err: any) {
     toast.error(err.response.data.message);

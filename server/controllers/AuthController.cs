@@ -79,6 +79,7 @@ namespace Server.Controllers
         {
             var task = new Models.Task
             {
+                Id = request.Id,
                 Title = request.Title,
                 Description = request.Description,
                 Start = request.Start,
@@ -97,7 +98,6 @@ namespace Server.Controllers
 
         // GET: api/auth/get-tasks/{username}
         [Authorize] // Protect with JWT Authentication
-        [HttpGet("get-tasks/{username}")]
         public async Task<IActionResult> GetTasks(string username)
         {
             var tasks = await _authService.GetUserTasksAsync(username);
@@ -120,6 +120,7 @@ namespace Server.Controllers
 
     public class AssignTaskRequest
     {
+        public string Id { get; set; } = null!;
         public string Username { get; set; } = null!;
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
