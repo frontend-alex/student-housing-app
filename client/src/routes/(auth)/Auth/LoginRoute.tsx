@@ -22,7 +22,7 @@ const LoginRoute = () => {
 
   return (
     <div className="grid-2 min-h-screen fixed dark:bg-[#0A0A0A] top-0 w-full">
-      <Gridbackround className={`${theme === 'light'  ? "opacity-30" : "opacity-5"} absolute top-0 h-[50vh]  z-[-1]`}/>
+      <Gridbackround className={`${theme === 'light'  ? "opacity-100" : "opacity-5"} absolute top-0 h-[50vh]  z-[-1]`}/>
       <div className="flex-center max-w-lg mx-auto px-5 lg:px-0">
         <div className="flex-col-3 w-full">
           <div>

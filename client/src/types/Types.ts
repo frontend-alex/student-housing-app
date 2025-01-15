@@ -14,15 +14,15 @@ export type User = {
     username: string;
     email: string; 
     password: string;
+    profileImage: string;
     roles: string[]; 
     tasks: Task[]; 
   };
   
 export type Task = {
-    taskId: string; 
+    id: string; 
     title: string;
     description: string; 
-    status: string; 
-    dueDate: string;
-    createdAt: string; 
+    start: Date;
+    end: Date; 
   };

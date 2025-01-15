@@ -4,7 +4,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 
 import useLocalStorage from '@/hooks/useGetLocalStorage';
 import Unauthorized from '@/routes/(error)/Unauthorized';
-import Gridbackround from '../ui/backgrounds/grid-backround';
+import DashboardLayout from './DashboardLayout';
 
 const RootLayout = () => {
 
@@ -14,10 +14,9 @@ const RootLayout = () => {
   if (!token) return <Unauthorized />;
 
   return (
-    <div>
-        <Gridbackround className={`${theme === 'light'  ? "opacity-30" : "opacity-5"} absolute top-0 h-[50vh]  z-[-1]`}/>
+    <DashboardLayout>
         <Outlet/>
-    </div>
+    </DashboardLayout>
   )
 }
 

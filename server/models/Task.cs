@@ -1,8 +1,10 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Server.Models{
-     public class Task {
+namespace Server.Models
+{
+    public class Task
+    {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string TaskId { get; set; } = null!;
@@ -13,13 +15,10 @@ namespace Server.Models{
         [BsonElement("Description")]
         public string Description { get; set; } = null!;
 
-        [BsonElement("Status")]
-        public string Status { get; set; } = "Pending"; 
+        [BsonElement("start")]
+        public DateTime Start { get; set; }
 
-        [BsonElement("DueDate")]
-        public DateTime DueDate { get; set; } = DateTime.Now.AddDays(7);  
-
-        [BsonElement("CreatedDate")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now; 
+        [BsonElement("End")]
+        public DateTime End { get; set; }
     }
 }

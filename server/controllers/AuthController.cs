@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Server.Services;
-using YourNamespace.Services;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
@@ -53,7 +52,7 @@ namespace Server.Controllers
                 return BadRequest(new { message = result });
             }
 
-            return Ok(new { message = "User registered successfully" });
+            return Ok(new { message = "User registered successfully", status=200 });
         }
 
         // POST: api/auth/login
@@ -70,11 +69,11 @@ namespace Server.Controllers
             // Generate JWT Token
             var token = _jwtService.GenerateToken(user.Id.ToString(), string.Join(",", user.Roles));
 
-            return Ok(new { message = "Login successful", token });
+            return Ok(new { message = "Login successful", token, user.Tasks });
         }
 
         // POST: api/auth/assign-task
-        [Authorize] // Protect with JWT Authentication
+        // [Authorize] 
         [HttpPost("assign-task")]
         public async Task<IActionResult> AssignTask([FromBody] AssignTaskRequest request)
         {
@@ -82,15 +81,15 @@ namespace Server.Controllers
             {
                 Title = request.Title,
                 Description = request.Description,
-                Status = request.Status,
-                DueDate = request.DueDate
+                Start = request.Start,
+                End = request.End,
             };
 
             var result = await _authService.AssignTaskAsync(request.Username, task);
 
             if (result != null)
             {
-                return BadRequest(new { message = result });
+                return BadRequest(new { message = result, status = 400 });
             }
 
             return Ok(new { message = "Task assigned successfully" });
@@ -124,7 +123,7 @@ namespace Server.Controllers
         public string Username { get; set; } = null!;
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public string Status { get; set; } = "Pending";
-        public DateTime DueDate { get; set; } = DateTime.Now.AddDays(7);
-    }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        }   
 }

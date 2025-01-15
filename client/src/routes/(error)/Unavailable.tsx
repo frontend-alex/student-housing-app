@@ -6,7 +6,7 @@ const Unavailable = () => {
   const goBack = useGoBack();
 
   return (
-    <div className="max-h-container flex-center max-w-wrapper min-h-[70vh]">
+    <div className="min-h-screen flex-center max-w-wrapper">
       <Gridbackround className="absolute z-[-1] top-0 opacity-5 h-[70dvh]"/>
       <div className="flex-col-5 text-center max-w-xl">
         <img

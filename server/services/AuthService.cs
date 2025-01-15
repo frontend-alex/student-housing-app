@@ -32,7 +32,9 @@ namespace Server.Services
                 Email = email,
                 Username = username,
                 Password = hashedPassword,
-                Roles = new List<string> { "Tenant" }
+                Roles = new List<string> { "Tenant" },
+                ProfileImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png"
+
             };
 
             await _userCollection.InsertOneAsync(newUser);
@@ -64,8 +66,6 @@ namespace Server.Services
             {
                 return "User not found";
             }
-
-            task.CreatedDate = DateTime.Now;
 
             user.Tasks.Add(task);
             await _userCollection.ReplaceOneAsync(u => u.Username == username, user);

@@ -17,6 +17,9 @@ namespace Server.Models
         [BsonElement("Password")]
         public string Password { get; set; } = null!;
 
+        [BsonElement("profileImage")]
+        public string ProfileImage { get; set; } = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png";
+
         [BsonElement("Roles")]
         public List<string> Roles { get; set; } = new List<string> { "Tenant" };
 

@@ -1,16 +1,14 @@
 @import "./tailwind-extended.css";
+@import "./custom.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-:root{
-  --mainColor: #7a73ff;
-}
-
 @layer base {
   :root {
+    --mainColor: #ea580c;
+
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;

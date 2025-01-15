@@ -5,7 +5,7 @@ const Unauthorized = () => {
   const goBack = useGoBack();
 
   return (
-    <div className="max-h-container flex-center max-w-wrapper">
+    <div className="min-h-screen flex-center max-w-wrapper">
       <div className="flex-col-5 text-center max-w-md">
         <img
           className="max-w-[300px] h-auto mx-auto"

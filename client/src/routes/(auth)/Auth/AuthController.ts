@@ -28,18 +28,11 @@ const AuthController = () => {
   });
 
   const onSubmitRegister = async (data: z.infer<typeof registerSchemaForm>) => {
-    const response = await registerUser(data, setIsLoading);
-    if(response?.status === 200) {
-        window.location.href = "/login";
-      }
+    await registerUser(data, setIsLoading);
   };
 
   const onSubmitLogin = async (data: z.infer<typeof loginSchemaForm>) => {
-    const response = await loginUser(data, setIsLoading);
-    if(response?.status === 200) {
-        localStorage.setItem("authToken", response?.data.token);
-        navigate('/dashboard')
-      }
+    await loginUser(data, setIsLoading);
   };
 
   return {

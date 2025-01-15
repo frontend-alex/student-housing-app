@@ -1,10 +1,27 @@
 import AuthLayout from "./components/layouts/AuthLayout";
 
-import { Route, Routes } from "react-router-dom"
-import { Aboutroute, Contactroute, LoginRoute, Mainroute, RegisterRoute } from "./routes/(auth)"
-import RootLayout from "./components/layouts/RootLayout";
-import { DashboardRoute } from "./routes/(root)";
+import { Route, Routes } from "react-router-dom";
+import {
+  Aboutroute,
+  Contactroute,
+  LoginRoute,
+  Mainroute,
+  RegisterRoute,
+} from "./routes/(auth)";
+import {
+  AssingTaskRoute,
+  ComplainsRoute,
+  ComplaintManagerRoute,
+  DashboardRoute,
+  ProfileRoute,
+  SettingsRoute,
+  UserManagementRoute,
+} from "./routes/(root)";
+
 import Unavailable from "./routes/(error)/Unavailable";
+
+import RootLayout from "./components/layouts/RootLayout";
+import AdminLayouts from "./components/layouts/AdminLayouts";
 
 const App = () => {
   return (
@@ -19,11 +36,19 @@ const App = () => {
         </Route>
         <Route element={<RootLayout />}>
           <Route path="/dashboard" element={<DashboardRoute />} />
+          <Route path="/profile/:id" element={<ProfileRoute />} />
+          <Route path="/complaints/:id" element={<ComplainsRoute />} />
+          <Route path="/settings" element={<SettingsRoute />} />
         </Route>
-        <Route path="*" element={<Unavailable/>} />
+        <Route path="/admin" element={<AdminLayouts />}>
+          <Route path="assign-task" element={<AssingTaskRoute />} />
+          <Route path="users" element={<UserManagementRoute />} />
+          <Route path="complain-manager" element={<ComplaintManagerRoute />} />
+        </Route>
+        <Route path="*" element={<Unavailable />} />
       </Routes>
     </div>
   );
-}
+};
 
-export default App
+export default App;

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { User } from '@/types/Types';
 
 const useAuthData = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 

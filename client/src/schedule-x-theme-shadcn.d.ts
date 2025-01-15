@@ -1,0 +1,1 @@
+declare module '@schedule-x/theme-shadcn/dist/index.css';
