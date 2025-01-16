@@ -10,6 +10,7 @@ import {
 } from "./routes/(auth)";
 import {
   AssingTaskRoute,
+  CalendarRoute,
   ComplainsRoute,
   ComplaintManagerRoute,
   DashboardRoute,
@@ -36,6 +37,7 @@ const App = () => {
         </Route>
         <Route element={<RootLayout />}>
           <Route path="/dashboard" element={<DashboardRoute />} />
+          <Route path="/calendar" element={<CalendarRoute />} />
           <Route path="/profile/:id" element={<ProfileRoute />} />
           <Route path="/complaints/:id" element={<ComplainsRoute />} />
           <Route path="/settings" element={<SettingsRoute />} />

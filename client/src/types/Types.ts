@@ -23,6 +23,7 @@ export type Task = {
     id: string; 
     title: string;
     description: string; 
+    urgencyLevel: string;
     start: Date;
     end: Date; 
   };

@@ -36,9 +36,9 @@
   }
   
   .admin-role {
-    @apply text-red-800 bg-red-100 font-bold
+    @apply text-red-500 bg-red-100 font-bold
   }
   
   .tenant-role {
-    @apply text-green-800 bg-green-100 font-bold
+    @apply text-green-500 bg-green-100 font-bold
   }

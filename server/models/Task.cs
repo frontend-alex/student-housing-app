@@ -14,6 +14,9 @@ namespace Server.Models
         [BsonElement("Description")]
         public string Description { get; set; } = null!;
 
+        [BsonElement("UrgencyLevel")]
+        public string UrgencyLevel { get; set; } = null!;
+
         [BsonElement("start")]
         public DateTime Start { get; set; }
 

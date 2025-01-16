@@ -1,4 +1,3 @@
-import { logoutUser } from "@/hooks/api";
 import { User as TUser } from "@/types/Types";
 import {
   Angry,
@@ -39,12 +38,25 @@ export const DashbaordSidebarLinks = (user: TUser) => {
       name: "Main Menu",
       links: [
         {
-          label: "Calendar",
+          label: "Dashboard",
           href: "/dashboard",
+          icon: (
+            <LayoutDashboard
+              className={`${
+                window.location.pathname === "/dashboard"
+                  ? "text-main"
+                  : "text-neutral-700 dark:text-neutral-200"
+              }  h-5 w-5 flex-shrink-0`}
+            />
+          ),
+        },
+        {
+          label: "Calendar",
+          href: "/calendar",
           icon: (
             <Calendar
               className={`${
-                window.location.pathname === "/dashboard"
+                window.location.pathname === "/calendar"
                   ? "text-main"
                   : "text-neutral-700 dark:text-neutral-200"
               }  h-5 w-5 flex-shrink-0`}
@@ -176,3 +188,19 @@ export const ProfileDropdownMenuLinks = [
     icon: <Settings size={15} />,
   },
 ];
+
+
+export const AssignTaskPriorityData = [
+  {
+    icon: <span className="h-4 w-4 rounded-full bg-green-500"></span>,
+    name: "Later"
+  },
+  {
+    icon: <span className="h-4 w-4 rounded-full bg-yellow-500"></span>,
+    name: "Priority"
+  },
+  {
+    icon: <span className="h-4 w-4 rounded-full bg-red-500"></span>,
+    name: "Urgent"
+  },
+]

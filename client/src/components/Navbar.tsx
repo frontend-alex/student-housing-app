@@ -1,22 +1,25 @@
 import useAuthData from "@/hooks/useAuthData";
 
 import { Button } from "./ui/button";
-import { LogOut, Menu } from "lucide-react";
+import { Calendar, LogOut, Menu } from "lucide-react";
 import { NavbarLinks } from "@/constants/Data";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { logoutUser } from "@/hooks/api";
 import { useRef } from "react";
+import { ThemeToggler } from "./ui/theme-toggler";
 
 const Logo = ({ navigate }: { navigate: NavigateFunction }) => {
   return (
-    <div onClick={() => navigate(0)}>
-      <h1 className="font-bold text-2xl">Logo.</h1>
+    <div className="flex-2" onClick={() => navigate(0)}>
+      <div className="bg-orange-600 p-2 rounded-lg">
+        <Calendar className="text-white" size={30}/>
+      </div>
+        <h1 className="font-bold text-3xl">Housing<span className="text-orange-600">VB</span></h1>
     </div>
   );
 };
 
 const Navbar = () => {
-
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   const { user } = useAuthData();
@@ -30,15 +33,6 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 flex-between p-5 max-w-wrapper">
       <Logo navigate={navigate} />
-      <ul
-        className={`${user ? "" : "ml-32"} hidden lg:flex items-center gap-3`}
-      >
-        {navbarLinks.map((links, id) => (
-          <li key={id}>
-            <a href={links.path}>{links.name}</a>
-          </li>
-        ))}
-      </ul>
 
       <div className="hidden lg:flex">
         {user ? (
@@ -49,18 +43,16 @@ const Navbar = () => {
             </Button>
           </div>
         ) : (
-          <div className="flex-2">
-            <Button>
-              <a href="/register">Register</a>
-            </Button>
-            <Button variant={"outline"}>
-              <a href="/login">Login</a>
+          <div className="flex-3">
+            <ThemeToggler />
+            <Button className="bg-orange-600 hover:bg-orange-700 text-white">
+              <a href="/register">Try for free</a>
             </Button>
           </div>
         )}
       </div>
 
-      <div className="lg:hidden">
+      {/* <div className="lg:hidden">
         <Menu className="cursor-pointer" onClick={toggleSidebar}/>
 
         <div className="side" ref={sidebarRef}>
@@ -92,7 +84,7 @@ const Navbar = () => {
             )}
           </div>
         </div>
-      </div>
+      </div> */}
     </nav>
   );
 };

@@ -1,13 +1,15 @@
 import Gridbackround from "@/components/ui/backgrounds/grid-backround";
 import { Button } from "@/components/ui/button";
+import useAuthData from "@/hooks/useAuthData";
 import { useGoBack } from "@/lib/utils";
 
 const Unavailable = () => {
-  const goBack = useGoBack();
+
+  const { user } = useAuthData();
 
   return (
     <div className="min-h-screen flex-center max-w-wrapper">
-      <Gridbackround className="absolute z-[-1] top-0 opacity-5 h-[70dvh]"/>
+      <Gridbackround className="absolute z-[-1] top-0 opacity-5 h-[70dvh]" />
       <div className="flex-col-5 text-center max-w-xl">
         <img
           className="max-w-[300px] h-auto mx-auto"
@@ -20,11 +22,19 @@ const Unavailable = () => {
           Please check the URL for errors, or go back to our homepage to
           continue exploring.
         </p>
-        <div className="flex-3 mx-auto">
-          <Button onClick={goBack} variant={"outline"}>
+        <div className="flex-3 mx-auto w-full">
+          <Button
+            className="w-full"
+            onClick={() => (window.location.href = "/")}
+            variant={"outline"}
+          >
             Go Back
           </Button>
-          <Button>Login</Button>
+          {!user && (
+            <Button className="py-5 bg-orange-600 hover:bg-orange-700 text-white">
+              Login
+            </Button>
+          )}
         </div>
       </div>
     </div>

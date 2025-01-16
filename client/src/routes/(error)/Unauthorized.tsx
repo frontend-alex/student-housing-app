@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
+import useAuthData from "@/hooks/useAuthData";
 import { useGoBack } from "@/lib/utils";
 
 const Unauthorized = () => {
-  const goBack = useGoBack();
+  const { user } = useAuthData();
 
   return (
     <div className="min-h-screen flex-center max-w-wrapper">
@@ -18,11 +19,19 @@ const Unauthorized = () => {
           logged in with the correct account, or contact support if you believe
           this is an error.
         </p>
-        <div className="flex-3 mx-auto">
-          <Button onClick={goBack} variant={"outline"}>
+        <div className="flex-3 mx-auto w-full">
+          <Button
+          className="w-full"
+            onClick={() => (window.location.href = "/")}
+            variant={"outline"}
+          >
             Go Back
           </Button>
-          <Button>Login</Button>
+          {!user && (
+            <Button className="py-5 bg-orange-600 hover:bg-orange-700 text-white">
+              Login
+            </Button>
+          )}
         </div>
       </div>
     </div>

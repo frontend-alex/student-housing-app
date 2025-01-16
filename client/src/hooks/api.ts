@@ -1,12 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { TLoginData, TRegisterData } from "@/types/Types";
-import { URL } from "@/constants/Data";
 import { toast } from "react-toastify";
-import useAuthData from "./useAuthData";
 
-const BASE_URL = `http://localhost:5166/api`; // Base URL for the API
+const BASE_URL = `http://localhost:5166/api`; 
 
-// Create an Axios instance for reusable configurations
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -59,8 +56,7 @@ export const registerUser = async (
     }
     return response.data;
   } catch (error: any) {
-    console.error("Registration error:", error);
-    throw new Error(handleError(error));
+    toast.error(error)
   } finally {
     setLoading(false);
   }
@@ -84,16 +80,13 @@ export const loginUser = async (
       data
     );
 
-    console.log(response);
     if (response.data.token) {
       localStorage.setItem("authToken", response.data.token);
-      localStorage.setItem("userTasks", response.data.tasks);
-      // window.location.href = "/dashboard";
+      window.location.href = "/dashboard";
     }
     return response.data;
   } catch (error: any) {
-    console.error("Login error:", error);
-    throw new Error(handleError(error));
+    toast.error(error)
   } finally {
     setLoading(false);
   }
@@ -111,14 +104,11 @@ export const MakeAdmin = async (id: string): Promise<any> => {
   try {
     const response = await axiosInstance.post(`/admin/add-admin-role/${id}`);
 
-    console.log(response);
-
     if (response?.status === 200) {
       window.location.reload();
       toast.success("User is now an admin");
     }
   } catch (err) {
-    console.error("Error adding admin role: ", err);
     toast.error("Failed to add admin role");
   }
 };
@@ -132,7 +122,6 @@ export const removeAdmin = async (id: string): Promise<any> => {
       toast.success("User is no longer an admin");
     }
   } catch (err) {
-    console.error("Error removing admin role: ", err);
     toast.error("Failed to remove admin role");
   }
 };
@@ -141,9 +130,10 @@ export const assingTask = async (data: any): Promise<any> => {
   try {
     const response = await axiosInstance.post(`/auth/assign-task`, data);
 
-    if (response?.status === 200) {
+    if(response.status === 200){
       window.location.reload();
     }
+
   } catch (err: any) {
     toast.error(err.response.data.message);
   }

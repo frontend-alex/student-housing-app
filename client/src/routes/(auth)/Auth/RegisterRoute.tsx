@@ -52,7 +52,7 @@ const RegisterRoute = () => {
                     <FormItem>
                       <FormLabel>Username</FormLabel>
                       <FormControl>
-                        <Input placeholder="Johnny912" {...field} />
+                        <Input placeholder="Johnny912" className="bg-neutral-100 dark:bg-neutral-900"{...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -65,7 +65,7 @@ const RegisterRoute = () => {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="example@gmail.com" {...field} />
+                        <Input placeholder="example@gmail.com" className="bg-neutral-100 dark:bg-neutral-900"{...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -78,7 +78,7 @@ const RegisterRoute = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input placeholder="Paxxsword55$" {...field} />
+                        <Input placeholder="Paxxsword55$" className="bg-neutral-100 dark:bg-neutral-900"{...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -86,7 +86,7 @@ const RegisterRoute = () => {
                 />
               </div>
               <div className="flex-col-3">
-                <Button disabled={isLoading} type="submit" className="py-5">
+                <Button disabled={isLoading} type="submit" className="py-5 bg-orange-600 hover:bg-orange-700 text-white">
                   {isLoading ? (
                     <div className="flex-2">
                       <Loader /> Creating

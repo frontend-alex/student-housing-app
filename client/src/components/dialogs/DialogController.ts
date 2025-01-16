@@ -5,12 +5,15 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { assingTask } from "@/hooks/api";
 import useAuthData from "@/hooks/useAuthData";
+import { formatTasks } from "@/lib/utils";
 
 const DialogController = (username: string) => {
 
   const { user } = useAuthData();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [assignTaskPriority, setAssingTaskPriority ] = useState("")
 
   const assingTasksForm = useForm<z.infer<typeof assingTaskSchemaForm>>({
     resolver: zodResolver(assingTaskSchemaForm),
@@ -23,11 +26,13 @@ const DialogController = (username: string) => {
   });
 
   const onAssingTaskSubmit = async (data: z.infer<typeof assingTaskSchemaForm>): Promise<any> => {
+
   
     const taskData = {
       Id: user?.id,
       Username: username,
       Title: data.title,
+      UrgencyLevel: assignTaskPriority,
       Description: data.description,
       Start: data.start, 
       End: data.end, 
@@ -37,9 +42,11 @@ const DialogController = (username: string) => {
   };
 
   return {
-    assingTasksForm,
-    onAssingTaskSubmit,
     isLoading,
+    assingTasksForm,
+    assignTaskPriority,
+    onAssingTaskSubmit,
+    setAssingTaskPriority,
   };
 };
 

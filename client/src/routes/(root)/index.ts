@@ -1,8 +1,9 @@
 //tenant-routes
 export { default as ProfileRoute} from './ProfileRoute';
 export { default as SettingsRoute } from './SettingsRoute';
-export { default as DashboardRoute } from './DashboardRoute';
+export { default as CalendarRoute } from './CalendarRoute';
 export { default as ComplainsRoute } from './ComplainsRoute';
+export { default as DashboardRoute } from './DashboardRoute';
 
 
 //admin-routes

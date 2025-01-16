@@ -1,3 +1,4 @@
+import { Task } from "@/types/Types";
 import { clsx, type ClassValue } from "clsx"
 import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge"
@@ -29,17 +30,22 @@ export const formatDate = (date: Date): string => {
 };
 
 export function formatTasks(input: Array<any>): Array<any> {
-  return input?.map((task, index) => {
+  return input?.map((task: Task, index) => {
       const startDate = new Date(task.start);
       const endDate = new Date(task.end);
 
+      console.log(startDate, endDate)
+
       const formattedStartDate = startDate.toISOString().slice(0, 16).replace('T', ' ');
       const formattedEndDate = endDate.toISOString().slice(0, 16).replace('T', ' ');
+
+
 
       return {
           id: index + 1, 
           title: task.title,
           start: formattedStartDate,
+          description: task.description,
           end: formattedEndDate
       };
   });

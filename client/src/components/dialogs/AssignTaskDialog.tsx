@@ -9,10 +9,10 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 
+import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-
 import { Button } from "../ui/button";
-import { CalendarIcon, Loader, Plus, X } from "lucide-react";
+import { CalendarIcon, Check, Loader, Plus, X } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -21,14 +21,26 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import DialogController from "./DialogController";
 import { Input } from "../ui/input";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
-import { cn } from "@/lib/utils";
+import DialogController from "./DialogController";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "../ui/dropdown-menu";
+import { AssignTaskPriorityData } from "@/constants/Data";
 
 const AssignTaskDialog = ({ username }: { username: string }) => {
-  const { onAssingTaskSubmit, assingTasksForm, isLoading } = DialogController(username);
+  const {
+    isLoading,
+    assingTasksForm,
+    assignTaskPriority,
+    onAssingTaskSubmit,
+    setAssingTaskPriority,
+  } = DialogController(username);
 
   return (
     <Dialog>
@@ -72,12 +84,32 @@ const AssignTaskDialog = ({ username }: { username: string }) => {
                     <FormItem>
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Input placeholder="CLeaning the bathroom" {...field} />
+                        <Input placeholder="Cleaning the bathroom" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="w-full mt-5">Chose urgency level</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-full">
+                    {AssignTaskPriorityData.map((pick, idx) => (
+                      <DropdownMenuItem
+                        onClick={() => setAssingTaskPriority(pick.name)}
+                        key={idx}
+                      >
+                        {assignTaskPriority === pick.name && <Check/>}
+                        <div className="flex-2">
+                          {pick.icon}
+                          <h1>{pick.name}</h1>
+                        </div>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
 
                 <div className="grid-2 gap-5 mt-5">
                   <FormField
@@ -169,18 +201,20 @@ const AssignTaskDialog = ({ username }: { username: string }) => {
               <DialogFooter className="flex gap-3 sm:gap-0 sm:justify-end">
                 <DialogClose asChild>
                   <Button type="button" variant="outline">
-                    <X/> Close
+                    <X /> Close
                   </Button>
                 </DialogClose>
                 <Button disabled={isLoading} type="submit" className="py-5">
-                    {isLoading ? (
-                      <div className="flex-2">
-                        <Loader className="animate-spin" /> Assinging Task...
-                      </div>
-                    ) : (
-                      <div className="flex-2"><Plus/> Assing Task</div>
-                    )}
-                  </Button>
+                  {isLoading ? (
+                    <div className="flex-2">
+                      <Loader className="animate-spin" /> Assinging Task...
+                    </div>
+                  ) : (
+                    <div className="flex-2">
+                      <Plus /> Assing Task
+                    </div>
+                  )}
+                </Button>
               </DialogFooter>
             </form>
           </Form>

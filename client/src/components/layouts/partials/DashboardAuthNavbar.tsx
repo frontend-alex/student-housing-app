@@ -20,6 +20,13 @@ import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
 import { logoutUser } from "@/hooks/api";
 import { LogoIcon } from "../DashboardLayout";
+import { cn } from "@/lib/utils";
+
+export const NotificationDot = ({className} : { className?: string}) => {
+  return (
+    <span className={cn("h-3 w-3 border border-neutral-100 dark:border-neutral-900 text-sm text-center flex-center text-white absolute top-3 left-4 rounded-full bg-red-400", className)} />
+  );
+};
 
 const DashboardAuthNavbar = () => {
   const { user, isLoading } = useAuthData();
@@ -35,7 +42,9 @@ const DashboardAuthNavbar = () => {
       <Breadcrumb className="hidden lg:flex">
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/"><LogoIcon/></BreadcrumbLink>
+            <BreadcrumbLink href="/">
+              <LogoIcon />
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -71,16 +80,14 @@ const DashboardAuthNavbar = () => {
           <DropdownMenuTrigger>
             <div className="relative">
               <Bell className="text-stone-400" />
-              {!checkTasks && (
-                <span className="h-3 w-3 border border-neutral-100 dark:border-neutral-900 text-sm text-center flex-center text-white absolute top-3 left-4 rounded-full bg-red-400" />
-              )}
+              {!checkTasks && <NotificationDot />}
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             {checkTasks ? (
               <p className="p-5">You have no notifications</p>
             ) : (
-              "You have no notifications"
+              <p className="p-5 text-black text-base">You have new notifications</p>
             )}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -111,15 +118,15 @@ const DashboardAuthNavbar = () => {
                   </a>
                 </DropdownMenuItem>
               ))}
-               <DropdownMenuItem>
-                  <a
-                    onClick={logoutUser}
-                    className="flex items-center gap-2 text-sm cursor-pointer"
-                  >
-                    <ArrowLeft className="text-red-500" size={15}/>
-                    <span className="text-red-500">Logout</span>
-                  </a>
-                </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a
+                  onClick={logoutUser}
+                  className="flex items-center gap-2 text-sm cursor-pointer"
+                >
+                  <ArrowLeft className="text-red-500" size={15} />
+                  <span className="text-red-500">Logout</span>
+                </a>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

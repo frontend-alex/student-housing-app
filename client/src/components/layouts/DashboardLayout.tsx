@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { User } from "lucide-react";
+import { Calendar, User } from "lucide-react";
 import { DashbaordSidebarLinks } from "@/constants/Data";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 
@@ -81,27 +81,30 @@ export const Logo = () => {
   return (
     <a
       href="#"
-      className="font-normal flex space-x-2 items-center text-sm text-orange-600 py-1 relative z-20"
+      className="font-normal flex space-x-2 items-center text-sm py-1 relative z-20"
     >
-      <div className="h-5 w-6 bg-orange-600 dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
+      <div className="flex-2">
+      <div className="bg-orange-400 p-2 rounded-lg">
+        <Calendar className="text-white" size={15}/>
+      </div>
+    </div>
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="font-medium text-orange-600 dark:text-white whitespace-pre"
+        className="font-medium dark:text-white whitespace-pre"
       >
-        Acet Labs
+        Housing<span className="text-orange-600">VB</span>
       </motion.span>
     </a>
   );
 };
 export const LogoIcon = () => {
   return (
-    <a
-      href="#"
-      className="font-normal flex space-x-2 items-center text-sm text-orange-600 py-1 relative z-20"
-    >
-      <div className="h-5 w-6 bg-orange-600 dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
-    </a>
+    <div className="flex-2">
+      <div className="bg-orange-400 p-2 rounded-lg">
+        <Calendar className="text-white" size={15}/>
+      </div>
+    </div>
   );
 };
 
