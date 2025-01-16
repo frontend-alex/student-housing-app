@@ -11,16 +11,13 @@ import { createViewDay, createViewMonthGrid, createViewWeek } from '@schedule-x/
 const CalendarRoute = () => {
   const { user } = useAuthData();  
   const [tasks, setTasks] = useState<any[]>([]);
-  const [isDataReady, setIsDataReady] = useState(false); 
 
   useEffect(() => {
     if (user && user.tasks) {
       const formattedTasks = formatTasks(user.tasks);
       setTasks(formattedTasks);
-      setIsDataReady(true); 
     }
   }, [user]);
-
 
   const eventsService = createEventsServicePlugin();
   
