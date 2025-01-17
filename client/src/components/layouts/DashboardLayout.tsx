@@ -46,7 +46,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                     {link.name}
                   </motion.span>
                   {link.links.map((l, idx) => (
-                    <SidebarLink className={`px-3 ${window.location.pathname === l.href ? "bg-neutral-200" : ""} rounded-md`} key={idx} link={l} />
+                    <SidebarLink className={`px-3 ${window.location.pathname === l.href ? "bg-neutral-200 dark:bg-neutral-800" : ""} rounded-md`} key={idx} link={l} />
                   ))}
                 </div>
               ))}

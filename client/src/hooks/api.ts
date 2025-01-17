@@ -1,8 +1,14 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { TLoginData, TRegisterData } from "@/types/Types";
+import {
+  TLoginData,
+  TRegisterData,
+  TAnnouncement,
+  TEvent,
+  TComplaint,
+} from "@/types/Types";
 import { toast } from "react-toastify";
 
-const BASE_URL = `http://localhost:5166/api`; 
+export const BASE_URL = `http://localhost:5166/api`;
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -56,7 +62,7 @@ export const registerUser = async (
     }
     return response.data;
   } catch (error: any) {
-    toast.error(error)
+    toast.error(handleError(error));
   } finally {
     setLoading(false);
   }
@@ -86,7 +92,7 @@ export const loginUser = async (
     }
     return response.data;
   } catch (error: any) {
-    toast.error(error)
+    toast.error(handleError(error));
   } finally {
     setLoading(false);
   }
@@ -100,6 +106,11 @@ export const logoutUser = async () => {
   window.location.href = "/";
 };
 
+/**
+ * Makes a user an admin.
+ * @param id - The ID of the user to be promoted to admin.
+ * @returns A Promise that resolves when the user is made an admin.
+ */
 export const MakeAdmin = async (id: string): Promise<any> => {
   try {
     const response = await axiosInstance.post(`/admin/add-admin-role/${id}`);
@@ -113,6 +124,11 @@ export const MakeAdmin = async (id: string): Promise<any> => {
   }
 };
 
+/**
+ * Removes the admin role from a user.
+ * @param id - The ID of the user to remove the admin role from.
+ * @returns A Promise that resolves when the admin role is removed.
+ */
 export const removeAdmin = async (id: string): Promise<any> => {
   try {
     const response = await axiosInstance.post(`/admin/remove-admin-role/${id}`);
@@ -126,15 +142,73 @@ export const removeAdmin = async (id: string): Promise<any> => {
   }
 };
 
+/**
+ * Assigns a task to a user.
+ * @param data - The task assignment data.
+ * @returns A Promise that resolves when the task is assigned successfully.
+ */
 export const assingTask = async (data: any): Promise<any> => {
   try {
     const response = await axiosInstance.post(`/auth/assign-task`, data);
 
-    if(response.status === 200){
+    if (response.status === 200) {
       window.location.reload();
     }
-
   } catch (err: any) {
     toast.error(err.response.data.message);
+  }
+};
+
+/**
+ * Creates a new announcement.
+ * @param data - The announcement data to be posted.
+ * @returns A Promise that resolves with the created announcement data.
+ */
+export const createAnnouncement = async (data: TAnnouncement): Promise<any> => {
+  try {
+    const response = await axiosInstance.post(
+      `/user/create-announcement`,
+      data
+    );
+    toast.success("Announcement created successfully");
+    return response.data;
+  } catch (err) {
+    toast.error("Failed to create announcement");
+    throw err;
+  }
+};
+
+/**
+ * Creates a new event.
+ * @param data - The event data to be posted.
+ * @returns A Promise that resolves with the created event data.
+ */
+export const createEvent = async (data: TEvent): Promise<any> => {
+  try {
+    const response = await axiosInstance.post(`/user/create-event`, data);
+    toast.success("Event created successfully");
+    return response.data;
+  } catch (err) {
+    toast.error("Failed to create event");
+    throw err;
+  }
+};
+
+/**
+ * Creates a new complaint.
+ * @param data - The complaint data to be posted.
+ * @returns A Promise that resolves with the created complaint data.
+ */
+export const createComplaint = async (data: TComplaint): Promise<any> => {
+  try {
+    const response = await axiosInstance.post(`/user/create-complaint`, data);
+    toast.success("Complaint created successfully");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+    return response.data;
+  } catch (err) {
+    toast.error("Failed to create complaint");
+    throw err;
   }
 };

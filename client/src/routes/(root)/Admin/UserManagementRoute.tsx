@@ -15,7 +15,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 
 const UserManagementRoute = () => {
   const { data, isLoading, error } = useFetch(
-    "http://localhost:5166/api/user/get-all-users",
+    "/user/get-all-users",
     []
   );
 

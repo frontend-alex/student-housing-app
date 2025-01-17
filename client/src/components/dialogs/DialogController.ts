@@ -1,13 +1,12 @@
 import { z } from "zod";
-import { assingTaskSchemaForm } from "@/lib/schemas";
+import { assingTaskSchemaForm, createComplaintSchemaForm } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { assingTask } from "@/hooks/api";
+import { assingTask, createComplaint } from "@/hooks/api";
 import useAuthData from "@/hooks/useAuthData";
-import { formatTasks } from "@/lib/utils";
 
-const DialogController = (username: string) => {
+const DialogController = (username: string | undefined) => {
 
   const { user } = useAuthData();
 
@@ -25,9 +24,16 @@ const DialogController = (username: string) => {
     },
   });
 
-  const onAssingTaskSubmit = async (data: z.infer<typeof assingTaskSchemaForm>): Promise<any> => {
+  const createComplaintsForm = useForm<z.infer<typeof createComplaintSchemaForm>>({
+    resolver: zodResolver(createComplaintSchemaForm),
+    defaultValues: {
+      title: "",
+      description: "",
+    },
+  });
 
-  
+
+  const onAssingTaskSubmit = async (data: z.infer<typeof assingTaskSchemaForm>): Promise<any> => {
     const taskData = {
       Id: user?.id,
       Username: username,
@@ -41,12 +47,24 @@ const DialogController = (username: string) => {
     await assingTask(taskData);
   };
 
+  const onComplaintCreateSubmit = async (data: z.infer<typeof createComplaintSchemaForm>): Promise<any> =>{
+    const complaintData = {
+      username,
+      title: data.title,
+      description: data.description,
+    }
+
+    await createComplaint(complaintData);
+  }
+
   return {
     isLoading,
     assingTasksForm,
     assignTaskPriority,
+    createComplaintsForm,
     onAssingTaskSubmit,
     setAssingTaskPriority,
+    onComplaintCreateSubmit
   };
 };
 

@@ -92,7 +92,7 @@ export const DashbaordSidebarLinks = (user: TUser) => {
       ],
     },
     {
-      name: "Admin Menu",
+      name: user?.roles.includes("Admin") ? "Admin Menu" : "",
       links: user?.roles.includes("Admin")
         ? [
             {

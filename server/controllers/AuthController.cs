@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Server.Services;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Server.Controllers

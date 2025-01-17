@@ -26,15 +26,15 @@ builder.Services.AddSingleton(sp =>
 });
 
 // CORS policy configuration
-builder.Services.AddCors(options => 
-    options.AddPolicy("AllowAll", builder => 
+builder.Services.AddCors(options =>
+    options.AddPolicy("AllowAll", builder =>
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
 // Register JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
@@ -49,6 +49,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddScoped<AdminService>();
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddSingleton<AuthService>();
+builder.Services.AddScoped<EventService>();
+builder.Services.AddScoped<AnnouncementService>();
+builder.Services.AddScoped<ComplaintService>();
 builder.Services.AddScoped<UserService>();
 
 builder.Services.AddControllers();
@@ -57,8 +60,8 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
-app.UseAuthentication(); 
-app.UseAuthorization();  
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

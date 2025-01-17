@@ -9,6 +9,21 @@ export type TLoginData = {
     password: string;
 }
 
+export type TAnnouncement = {
+
+}
+
+export type TComplaint = {
+  username: string | undefined;
+  title: string;
+  description: string;
+  createdAt: string;
+}
+
+export type TEvent = {
+  
+}
+
 export type User = {
     id: string;
     username: string;
@@ -26,4 +41,4 @@ export type Task = {
     urgencyLevel: string;
     start: Date;
     end: Date; 
-  };
+}

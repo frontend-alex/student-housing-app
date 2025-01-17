@@ -8,12 +8,11 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: #f0f0f0; 
+    @apply bg-neutral-100 dark:bg-neutral-900; 
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #000; 
-    transition: background 0.3s ease;
+    @apply bg-neutral-200 dark:bg-neutral-800
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -29,6 +28,9 @@
     transition: width .3s;
 }
 
+.custom-card-bg{
+    @apply bg-neutral-100 border dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 shadow-lg rounded-md p-3
+}
 
 
 .role-badge {

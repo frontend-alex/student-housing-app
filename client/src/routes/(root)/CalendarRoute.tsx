@@ -10,6 +10,7 @@ import { createViewDay, createViewMonthGrid, createViewWeek } from '@schedule-x/
 
 const CalendarRoute = () => {
   const { user } = useAuthData();  
+  
   const [tasks, setTasks] = useState<any[]>([]);
 
   useEffect(() => {

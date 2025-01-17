@@ -21,9 +21,7 @@ export const registerSchemaForm = z.object({
   }),
 });
 
-
 export const assingTaskSchemaForm = z.object({
-  
   title: z.string().min(4, {
     message: "Name must be at least 4 characters.",
   }),
@@ -35,5 +33,14 @@ export const assingTaskSchemaForm = z.object({
   }),
   end: z.date({
     message: "Please enter a valid date.",
-  })
-})
+  }),
+});
+
+export const createComplaintSchemaForm = z.object({
+  title: z.string().min(4, {
+    message: "Title must be at least 4 characters.",
+  }),
+  description: z.string().min(6, {
+    message: "Description must be at least 6 characters.",
+  }),
+});

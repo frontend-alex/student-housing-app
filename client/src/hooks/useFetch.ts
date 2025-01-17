@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
+import { BASE_URL } from './api';
+
+
 
 type FetchData<T> = {
   data: T | undefined;
@@ -33,7 +36,7 @@ const useFetch = <T, >(url: string | null, initialState: T | undefined): FetchDa
       setError(null); 
 
       try {
-        const response = await axios.get<T>(url);
+        const response = await axios.get<T>(`${BASE_URL}${url}`);
         setData(response.data);
       } catch (err) {
         const axiosError = err as AxiosError;
