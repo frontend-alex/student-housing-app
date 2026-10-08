@@ -1,46 +1,82 @@
-# Initial Commit
+# Student Housing Application
 
-This repository is structured to host a full-stack application with the following components:
+A student-housing management prototype with resident-facing screens and administration interfaces backed by an ASP.NET Core API.
 
-## 🗂 Folder Structure
+## Current status
 
-1. **`client/`** - Contains the frontend application built with React and TypeScript using Vite.
-2. **`server/`** - Contains the backend application built with .NET.
+Academic application prototype. Frontend routes cover dashboards, calendars, profiles, complaints, task assignment, and administration. A visible UI route does not by itself confirm that its entire workflow is implemented or authorized by the backend.
 
----
+## Features and implementation
 
-## 🚀 Technology Stack
+- React public pages, login/registration screens, and resident/admin layouts.
+- Calendar and complaint-related interfaces.
+- ASP.NET Core controllers and services for authentication, users, and admin-role operations.
+- MongoDB configuration and dependency injection.
+- JWT bearer authentication with issuer, audience, and lifetime validation.
 
-### Frontend (`client/`):
-- **React**: JavaScript library for building user interfaces.
-- **TypeScript**: Strongly-typed superset of JavaScript.
-- **Vite**: Next-generation front-end tooling for fast builds and development.
+## Technology
 
-### Backend (`server/`):
-- **.NET**: Framework for building robust and scalable backend services.
+React, TypeScript, Vite, Tailwind CSS, ASP.NET Core (.NET 9), MongoDB, BCrypt, and JWT. Additional UI/auth packages are listed in client/package.json.
 
----
+## Repository map
 
-## 📁 Folder Contents
+| Path | Purpose |
+| --- | --- |
+| [client/src/App.tsx](client/src/App.tsx) | Frontend route composition |
+| [client/src/components](client/src/components) | Reusable UI, layouts, and dialogs |
+| [client/src/routes](client/src/routes) | Public, resident, and administration pages |
+| [server/Program.cs](server/Program.cs) | API setup and service registrations |
+| [server/controllers](server/controllers) | HTTP endpoints |
+| [server/services](server/services) | Application services |
+| [server/models](server/models) | Stored domain models |
 
-### `client/`
-- Frontend application setup using React and TypeScript.
-- Includes:
-  - `src/`: Source files for the React application.
-  - `public/`: Static assets.
+## Local setup
 
-### `server/`
-- Backend application setup using .NET.
-- Includes:
-  - `Controllers/`: API endpoints.
-  - `Models/`: Data models.
-  - `Services/`: Business logic.
+Install the .NET 9 SDK, Node/npm, and a running MongoDB instance. From the repository root:
 
----
+```bash
+git clone https://github.com/frontend-alex/student-housing-app.git
+cd student-housing-app
+dotnet restore s1-5-webapp-project.sln
+```
 
-## 🛠️ Setup Instructions
+Supply local configuration under MongoDbSettings:ConnectionString, MongoDbSettings:DatabaseName, Jwt:SecretKey, Jwt:Issuer, and Jwt:Audience. ASP.NET environment variables may use double underscores, for example MongoDbSettings__ConnectionString. Use your own local values rather than reusing committed credentials.
 
-### Backend (`server/`)
-1. Navigate to the `server` directory:
-   ```bash
-   cd server
+```bash
+dotnet run --project server/server.csproj
+```
+
+Read the API listening URL from the console and align the frontend's API calls with it. In a separate terminal:
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+The API uses HTTPS redirection, so trust/configure a development certificate if your local URL requires HTTPS.
+
+## Verification
+
+```bash
+dotnet build s1-5-webapp-project.sln
+cd client
+npm run build
+npm run lint
+```
+
+Check login, role-dependent access, complaint handling, and calendar/task flows manually. No runtime verification or authorization audit was performed in this documentation update.
+
+## Limitations and next steps
+
+- The server currently permits any CORS origin; deployment configuration requires review.
+- Client layouts and route guards do not replace backend authorization checks.
+- Several frontend areas have more UI coverage than the currently exposed controller set; assess each workflow against actual endpoints.
+- A repository-wide automated test suite was not found in the inspected tree.
+
+## Code review starting points
+
+- [server/Program.cs](server/Program.cs)
+- [server/controllers/AdminController.cs](server/controllers/AdminController.cs)
+- [server/controllers/AuthController.cs](server/controllers/AuthController.cs)
+- [client/src/App.tsx](client/src/App.tsx)
